@@ -1,6 +1,6 @@
 ﻿namespace BazaAudyt.Models
 {
-    public class StanowiskaPracy
+    public class StanowiskoPracy
     {
         public int Id { get; set; }
         public string Wydział { get; set; }

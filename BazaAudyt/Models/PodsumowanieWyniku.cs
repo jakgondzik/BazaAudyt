@@ -1,6 +1,6 @@
 ﻿namespace BazaAudyt.Models
 {
-    public class LPA_PodsumowanieWyników
+    public class PodsumowanieWyniku
     {
         public int Id { get; set; }
         public int IdCzęści { get; set; }

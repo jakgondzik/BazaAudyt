@@ -1,6 +1,6 @@
 ﻿namespace BazaAudyt.Models
 {
-    public class LPA_PlanAudytów
+    public class PlanAudytów
     {
         public int Id { get; set; }
         public string Audytor { get; set; }
