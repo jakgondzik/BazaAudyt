@@ -9,24 +9,22 @@ using BazaAudyt.Models;
 
 namespace BazaAudyt.Controllers
 {
-    public class CzłonekZespołuController : Controller
+    public class PytanieController : Controller
     {
         private readonly AppDbContext _context;
 
-        public CzłonekZespołuController(AppDbContext context)
+        public PytanieController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: CzłonekZespołu
+        // GET: Pytanie
         public async Task<IActionResult> Index()
         {
-            var czlonkowie = _context.CzlonkowieZespolu.ToList();
-            return View(czlonkowie);
-            //return View(await _context.CzlonkowieZespolu.ToListAsync());
+            return View(await _context.LPA_Pytania.ToListAsync());
         }
 
-        // GET: CzłonekZespołu/Details/5
+        // GET: Pytanie/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +32,39 @@ namespace BazaAudyt.Controllers
                 return NotFound();
             }
 
-            var członekZespołu = await _context.CzlonkowieZespolu
+            var lPA_Pytanie = await _context.LPA_Pytania
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (członekZespołu == null)
+            if (lPA_Pytanie == null)
             {
                 return NotFound();
             }
 
-            return View(członekZespołu);
+            return View(lPA_Pytanie);
         }
 
-        // GET: CzłonekZespołu/Create
+        // GET: Pytanie/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: CzłonekZespołu/Create
+        // POST: Pytanie/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Imie,Nazwisko,Inicjaly,Telefon,CzyAdmin,Warstwa,CzyAudytor")] CzłonekZespołu członekZespołu)
+        public async Task<IActionResult> Create([Bind("Id,Pytanie,Obszar,Nr,Aktywne,Norma,Waga")] LPA_Pytanie lPA_Pytanie)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(członekZespołu);
+                _context.Add(lPA_Pytanie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(członekZespołu);
+            return View(lPA_Pytanie);
         }
 
-        // GET: CzłonekZespołu/Edit/5
+        // GET: Pytanie/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +72,22 @@ namespace BazaAudyt.Controllers
                 return NotFound();
             }
 
-            var członekZespołu = await _context.CzlonkowieZespolu.FindAsync(id);
-            if (członekZespołu == null)
+            var lPA_Pytanie = await _context.LPA_Pytania.FindAsync(id);
+            if (lPA_Pytanie == null)
             {
                 return NotFound();
             }
-            return View(członekZespołu);
+            return View(lPA_Pytanie);
         }
 
-        // POST: CzłonekZespołu/Edit/5
+        // POST: Pytanie/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Imie,Nazwisko,Inicjaly,Telefon,CzyAdmin,Warstwa,CzyAudytor")] CzłonekZespołu członekZespołu)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Pytanie,Obszar,Nr,Aktywne,Norma,Waga")] LPA_Pytanie lPA_Pytanie)
         {
-            if (id != członekZespołu.Id)
+            if (id != lPA_Pytanie.Id)
             {
                 return NotFound();
             }
@@ -98,12 +96,12 @@ namespace BazaAudyt.Controllers
             {
                 try
                 {
-                    _context.Update(członekZespołu);
+                    _context.Update(lPA_Pytanie);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CzłonekZespołuExists(członekZespołu.Id))
+                    if (!LPA_PytanieExists(lPA_Pytanie.Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +112,10 @@ namespace BazaAudyt.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(członekZespołu);
+            return View(lPA_Pytanie);
         }
 
-        // GET: CzłonekZespołu/Delete/5
+        // GET: Pytanie/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,34 +123,34 @@ namespace BazaAudyt.Controllers
                 return NotFound();
             }
 
-            var członekZespołu = await _context.CzlonkowieZespolu
+            var lPA_Pytanie = await _context.LPA_Pytania
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (członekZespołu == null)
+            if (lPA_Pytanie == null)
             {
                 return NotFound();
             }
 
-            return View(członekZespołu);
+            return View(lPA_Pytanie);
         }
 
-        // POST: CzłonekZespołu/Delete/5
+        // POST: Pytanie/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var członekZespołu = await _context.CzlonkowieZespolu.FindAsync(id);
-            if (członekZespołu != null)
+            var lPA_Pytanie = await _context.LPA_Pytania.FindAsync(id);
+            if (lPA_Pytanie != null)
             {
-                _context.CzlonkowieZespolu.Remove(członekZespołu);
+                _context.LPA_Pytania.Remove(lPA_Pytanie);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CzłonekZespołuExists(int id)
+        private bool LPA_PytanieExists(int id)
         {
-            return _context.CzlonkowieZespolu.Any(e => e.Id == id);
+            return _context.LPA_Pytania.Any(e => e.Id == id);
         }
     }
 }

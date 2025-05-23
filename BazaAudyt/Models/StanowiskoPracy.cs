@@ -3,7 +3,7 @@
     public class StanowiskoPracy
     {
         public int Id { get; set; }
-        public string Wydział { get; set; }
+        public string Wydzial { get; set; }
         public string Proces {  get; set; }
         public string Gniazdo {  get; set; }
         public int NrGniazda { get; set; }

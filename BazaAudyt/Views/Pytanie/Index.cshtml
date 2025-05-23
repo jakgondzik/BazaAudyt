@@ -1,0 +1,65 @@
+﻿@model IEnumerable<BazaAudyt.Models.LPA_Pytanie>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pytania</h1>
+
+<p>
+    <a asp-action="Create">Dodaj nowe pytanie</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pytanie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Obszar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aktywne)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Norma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Waga)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pytanie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Obszar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aktywne)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Norma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Waga)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

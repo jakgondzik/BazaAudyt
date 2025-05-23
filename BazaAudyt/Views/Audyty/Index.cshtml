@@ -1,0 +1,107 @@
+﻿@model IEnumerable<BazaAudyt.Models.Audyt>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Audyty</h1>
+
+<p>
+    <a asp-action="Create">Podejrzyj zaplanowane audyty</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Audytor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Towarzyszacy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stanowisko)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataPlanowana)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ObszarAudytu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataZamkniecia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pozycja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lider)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wydzial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brygada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Audytowany)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Komentarz)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Audytor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Towarzyszacy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stanowisko)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPlanowana)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ObszarAudytu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataZamkniecia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pozycja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lider)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wydzial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brygada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Audytowany)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Komentarz)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

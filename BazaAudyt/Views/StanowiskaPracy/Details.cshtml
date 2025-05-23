@@ -1,0 +1,66 @@
+﻿@model BazaAudyt.Models.StanowiskoPracy
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>StanowiskoPracy</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Wydzial)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Wydzial)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Proces)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Proces)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gniazdo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gniazdo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NrGniazda)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NrGniazda)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RodzajStanowiska)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RodzajStanowiska)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdLidera)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdLidera)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Typ)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Typ)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ObszarLPA)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ObszarLPA)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

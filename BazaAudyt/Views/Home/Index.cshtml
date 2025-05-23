@@ -4,28 +4,3 @@
     ViewData["Title"] = "Członkowie Zespołu";
 }
 
-<h1>Członkowie Zespołu</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Imię</th>
-            <th>Nazwisko</th>
-            <th>Telefon</th>
-            <th>Admin?</th>
-            <th>Audytor?</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var c in Model)
-        {
-            <tr>
-                <td>@c.Imie</td>
-                <td>@c.Nazwisko</td>
-                <td>@c.Telefon</td>
-                <td>@(c.CzyAdmin ? "Tak" : "Nie")</td>
-                <td>@(c.CzyAudytor ? "Tak" : "Nie")</td>
-            </tr>
-        }
-    </tbody>
-</table>

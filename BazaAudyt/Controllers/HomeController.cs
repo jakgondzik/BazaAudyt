@@ -17,8 +17,7 @@ namespace BazaAudyt.Controllers
 
         public IActionResult Index()
         {
-            var czlonkowie = _context.CzlonkowieZespolu.ToList();
-            return View(czlonkowie);
+            return View();
         }
 
         public IActionResult Privacy()
