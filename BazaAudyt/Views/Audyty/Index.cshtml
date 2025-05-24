@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<BazaAudyt.Models.Audyt>
-
+@*@model Tuple<BazaAudyt.Models.Audyt,BazaAudyt.Models.CzłonekZespołu>*@
 @{
     ViewData["Title"] = "Index";
 }
@@ -58,6 +58,9 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                    <select name="example">
+                        <option value="A">A</option>
+                    </select>
                 @Html.DisplayFor(modelItem => item.Audytor)
             </td>
             <td>
