@@ -13,9 +13,12 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Audytor" class="control-label"></label>
-                <input asp-for="Audytor" class="form-control" />
-                <span asp-validation-for="Audytor" class="text-danger"></span>
+                <label asp-for="AudytorId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.AudytorId,
+                         (IEnumerable<SelectListItem>)ViewBag.Audytorzy,
+                         "Wybierz audytora",
+                         new { @class = "form-control" })
+                <span asp-validation-for="AudytorId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Towarzyszacy" class="control-label"></label>

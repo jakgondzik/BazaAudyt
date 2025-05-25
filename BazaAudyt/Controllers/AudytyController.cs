@@ -46,6 +46,15 @@ namespace BazaAudyt.Controllers
         // GET: Audyty/Create
         public IActionResult Create()
         {
+            var czlonkowie = _context.CzlonkowieZespolu
+                .Select(c => new SelectListItem
+                {
+                    Text = c.Inicjaly,           
+                    Value = c.Id.ToString()      
+                }).ToList();
+
+            ViewBag.Audytorzy = czlonkowie;
+
             return View();
         }
 

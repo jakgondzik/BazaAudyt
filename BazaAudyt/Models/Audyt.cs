@@ -3,10 +3,11 @@
     public class Audyt
     {
         public int Id { get; set; }
-        public string? Audytor { get; set; }
+        public int? AudytorId { get; set; }
+        public CzłonekZespołu? Audytor { get; set; }
         public string? Towarzyszacy { get; set; }
         public DateTime? Data { get; set; }
-        public string? Stanowisko { get; set; }
+        public int? Stanowisko { get; set; }
         public DateTime? DataPlanowana { get; set; }
         public string? ObszarAudytu { get; set; }
         public DateTime? DataZamkniecia {  get; set; }
