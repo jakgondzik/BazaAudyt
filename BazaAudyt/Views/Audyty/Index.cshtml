@@ -1,4 +1,4 @@
-﻿@model BazaAudyt.Models.AudytViewModel
+﻿@model IEnumerable<BazaAudyt.Models.Audyt>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,35 +14,35 @@
     <thead>
         <tr>
 
-                <th>@Html.DisplayNameFor(model => model.Audyty[0].Audytor)</th>
-                <th>@Html.DisplayNameFor(model => model.Audyty[0].Towarzyszacy)</th>
-                <th>@Html.DisplayNameFor(model => model.Audyty[0].Data)</th>
-                <th>@Html.DisplayNameFor(model => model.Audyty[0].Stanowisko)</th>
-                <th>@Html.DisplayNameFor(model => model.Audyty[0].DataPlanowana)</th>
-                <th>@Html.DisplayNameFor(model => model.Audyty[0].ObszarAudytu)</th>
-                <th>@Html.DisplayNameFor(model => model.Audyty[0].DataZamkniecia)</th>
-                <th>@Html.DisplayNameFor(model => model.Audyty[0].Pozycja)</th>
-                <th>@Html.DisplayNameFor(model => model.Audyty[0].Lider)</th>
-                <th>@Html.DisplayNameFor(model => model.Audyty[0].Wydzial)</th>
-                <th>@Html.DisplayNameFor(model => model.Audyty[0].Brygada)</th>
-                <th>@Html.DisplayNameFor(model => model.Audyty[0].Audytowany)</th>
-                <th>@Html.DisplayNameFor(model => model.Audyty[0].Komentarz)</th>
+                <th>@Html.DisplayNameFor(model => model.Audytor)</th>
+                <th>@Html.DisplayNameFor(model => model.Towarzyszacy)</th>
+                <th>@Html.DisplayNameFor(model => model.Data)</th>
+                <th>@Html.DisplayNameFor(model => model.Stanowisko)</th>
+                <th>@Html.DisplayNameFor(model => model.DataPlanowana)</th>
+                <th>@Html.DisplayNameFor(model => model.ObszarAudytu)</th>
+                <th>@Html.DisplayNameFor(model => model.DataZamkniecia)</th>
+                <th>@Html.DisplayNameFor(model => model.Pozycja)</th>
+                <th>@Html.DisplayNameFor(model => model.Lider)</th>
+                <th>@Html.DisplayNameFor(model => model.Wydzial)</th>
+                <th>@Html.DisplayNameFor(model => model.Brygada)</th>
+                <th>@Html.DisplayNameFor(model => model.Audytowany)</th>
+                <th>@Html.DisplayNameFor(model => model.Komentarz)</th>
 
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Audyty)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
                     <select name="Audytor">
-                        @foreach (var czlonek in Model.CzlonkowieZespolu)
+                       @* @foreach (var czlonek in Model.CzlonkowieZespolu)
                         {
                             <option value="@czlonek.Id" selected="@(czlonek.Inicjaly == item.Audytor ? "selected" : null)">
                                 @czlonek.Inicjaly
                             </option>
 
-                        }
+                        }*@
                     </select>
                     @Html.DisplayFor(modelItem => item.Audytor)
                 </td>

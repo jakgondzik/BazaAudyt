@@ -21,13 +21,8 @@ namespace BazaAudyt.Controllers
         // GET: Audyty
         public async Task<IActionResult> Index()
         {
-            var model = new AudytViewModel
-            {
-                Audyty = await _context.LPA_PlanAudytow.ToListAsync(),
-                CzlonkowieZespolu = await _context.CzlonkowieZespolu.ToListAsync()
-            };
-
-            return View(model);
+            var audyty = _context.LPA_PlanAudytow.ToList();
+            return View(audyty);
         }
 
         // GET: Audyty/Details/5

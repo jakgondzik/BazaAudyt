@@ -40,22 +40,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                    <input id="#Imie" type="text" value="@Html.DisplayFor(modelItem => item.Imie)" />
+                    @Html.DisplayFor(modelItem => item.Imie)
             </td>
             <td>
-                    <input id="#Nazwisko" type="text" value="@Html.DisplayFor(modelItem => item.Nazwisko)" />
+                    @Html.DisplayFor(modelItem => item.Nazwisko)
             </td>
             <td>
-                    <input id="#Inicjaly" type="text" value="@Html.DisplayFor(modelItem => item.Inicjaly)" />
+                    @Html.DisplayFor(modelItem => item.Inicjaly)
             </td>
             <td>
-                    <input id="#Telefon" type="text" value="@Html.DisplayFor(modelItem => item.Telefon)" />
+                    @Html.DisplayFor(modelItem => item.Telefon)
             </td>
             <td>
                     @Html.DisplayFor(modelItem => item.CzyAdmin)
             </td>
             <td>
-                    <input id="#Warstwa" type="text" value="@Html.DisplayFor(modelItem => item.Warstwa)" />
+                    @Html.DisplayFor(modelItem => item.Warstwa)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CzyAudytor)
