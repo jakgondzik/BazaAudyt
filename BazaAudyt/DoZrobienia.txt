@@ -1,2 +1,6 @@
 ﻿#Do zrobienia
 -Wyświetlanie listy kombinacji imie + nazwisko w modelu Audyty
+-Sprawdzić typy danych, znalazłem relacje int->varchar
+-Sprawdzić modele, czasem jest dopuszczalny null a ja tego nie zauważyłem
+-Poprawić wyświetlanie danych, sprawdzić czy to kwestia błednego zapisu w audytach
+-Zmienić nazwe audytorId na Audytor, za szybko zmieniłem
