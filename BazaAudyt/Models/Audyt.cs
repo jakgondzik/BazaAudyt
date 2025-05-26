@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public int? AudytorId { get; set; }
-        public CzłonekZespołu? Audytor { get; set; }
+       // public CzłonekZespołu? Audytor { get; set; }
         public string? Towarzyszacy { get; set; }
         public DateTime? Data { get; set; }
         public int? Stanowisko { get; set; }

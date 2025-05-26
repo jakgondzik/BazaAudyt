@@ -14,7 +14,8 @@
     <thead>
         <tr>
 
-                <th>@Html.DisplayNameFor(model => model.Audytor)</th>
+            @*<th>@Html.DisplayNameFor(model => model.Audytor)</th>*@
+            <th>Audytor</th>
                 <th>@Html.DisplayNameFor(model => model.Towarzyszacy)</th>
                 <th>@Html.DisplayNameFor(model => model.Data)</th>
                 <th>@Html.DisplayNameFor(model => model.Stanowisko)</th>
@@ -44,7 +45,8 @@
 
                         }*@
                     </select>
-                    @Html.DisplayFor(modelItem => item.Audytor)
+                    @Html.DisplayFor(modelItem => item.AudytorId)
+                    @*Wyrzuca indeksy a miało wyrzucać Nazwisko*@
                 </td>
                 <td>@Html.DisplayFor(modelItem => item.Towarzyszacy)</td>
                 <td>@Html.DisplayFor(modelItem => item.Data)</td>

@@ -4,3 +4,7 @@
 -Sprawdzić modele, czasem jest dopuszczalny null a ja tego nie zauważyłem
 -Poprawić wyświetlanie danych, sprawdzić czy to kwestia błednego zapisu w audytach
 -Zmienić nazwe audytorId na Audytor, za szybko zmieniłem
+
+-Głupieje Edit przy audytach i trzeba poprawić, żeby się wyświetlało nazwisko
+
+-Czy towarzyszący też po id czy imie i nazwisko
