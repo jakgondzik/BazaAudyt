@@ -21,7 +21,7 @@ CREATE TABLE StanowiskaPracy (
 );
 CREATE TABLE LPA_PlanAudytow (
     Id INT PRIMARY KEY,
-    Audytor INT,
+    AudytorId INT,
     Towarzyszacy VARCHAR(100),
     Data DATETIME,
     Stanowisko INT,
@@ -35,7 +35,7 @@ CREATE TABLE LPA_PlanAudytow (
     Brygada INT,
     Audytowany VARCHAR(100),
     Komentarz TEXT,
-    FOREIGN KEY (Audytor) REFERENCES CzlonkowieZespolu(Id),
+    FOREIGN KEY (AudytorId) REFERENCES CzlonkowieZespolu(Id),
     FOREIGN KEY (Stanowisko) REFERENCES StanowiskaPracy(Id)
 );
 CREATE TABLE LPA_Pytania (
