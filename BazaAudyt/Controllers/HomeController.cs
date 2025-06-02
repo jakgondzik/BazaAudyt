@@ -33,7 +33,8 @@ namespace BazaAudyt.Controllers
         }
         public IActionResult Login()
         {
-            return RedirectToAction("~/View/Index", "AudytyController");
+            return View();
+            //return RedirectToAction("~/View/Index", "AudytyController");
         }
 
         [HttpPost]
