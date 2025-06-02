@@ -1,4 +1,7 @@
-﻿#Do zrobienia
+﻿Konto testowe:
+root root
+
+#Do zrobienia
 -Wyświetlanie listy kombinacji imie + nazwisko w modelu Audyty
 -Sprawdzić typy danych, znalazłem relacje int->varchar
 -Sprawdzić modele, czasem jest dopuszczalny null a ja tego nie zauważyłem

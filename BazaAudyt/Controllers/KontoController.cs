@@ -2,10 +2,11 @@
 
 namespace BazaAudyt.Controllers
 {
-    public class KontroController : Controller
+    public class KontoController : Controller
     {
         public IActionResult Index()
         {
+
             return View();
         }
     }
