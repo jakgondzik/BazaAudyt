@@ -14,4 +14,6 @@ public class AppDbContext : DbContext
     public DbSet<Audyt> LPA_PlanAudytow { get; set; }
     public DbSet<StanowiskoPracy> StanowiskaPracy { get; set; }
     public DbSet<PodsumowanieWyniku> LPA_PodsumowanieWynikow { get; set; }
+
+public DbSet<BazaAudyt.Models.Konto> Konto { get; set; } = default!;
 }
