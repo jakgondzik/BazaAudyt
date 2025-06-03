@@ -18,6 +18,7 @@ namespace BazaAudyt.Controllers
 
         public IActionResult Index()
         {
+            //return RedirectToAction("Index","Audyty");
             return View();
         }
 
@@ -33,8 +34,9 @@ namespace BazaAudyt.Controllers
         }
         public IActionResult Login()
         {
-            return View();
-            //return RedirectToAction("~/View/Index", "AudytyController");
+            return RedirectToAction("Index", "Audyty");
+            //return View();
+            //return RedirectToAction("Succes");
         }
 
         [HttpPost]
@@ -57,8 +59,8 @@ namespace BazaAudyt.Controllers
 
         public IActionResult Success()
         {
-            return RedirectToAction("~/View/Index","AudytyController");
-            //return View();
+           // return RedirectToAction("~/View/Index","AudytyController");
+            return View();
         }
 
         public IActionResult Fail()
