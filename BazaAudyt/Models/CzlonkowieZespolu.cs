@@ -10,5 +10,6 @@
         public bool CzyAdmin { get; set; }
         public string? Warstwa { get; set; }
         public bool CzyAudytor { get; set; }
+        public string NazwaUzytkownika {  get; set; }
     }
 }
