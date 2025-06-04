@@ -45,7 +45,6 @@ namespace BazaAudyt.Controllers
         {
             if (!ModelState.IsValid)
             {
-                TempData["LoginError"] = "Nieprawid³owe dane wejœciowe.";
                 return RedirectToAction("Fail");
             }
 
@@ -53,13 +52,11 @@ namespace BazaAudyt.Controllers
 
             if (user == null)
             {
-                TempData["LoginError"] = "Nie znaleziono u¿ytkownika.";
                 return RedirectToAction("Fail");
             }
 
             if (user.Password.Trim() != model.Password)
             {
-                TempData["LoginError"] = "B³êdne has³o.";
                 return RedirectToAction("Fail");
             }
 
@@ -73,7 +70,7 @@ namespace BazaAudyt.Controllers
 
         public IActionResult Fail()
         {
-            return View("Index","Home");
+            return RedirectToAction("Index");
         }
     }
 }
