@@ -8,12 +8,13 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    public DbSet<CzłonekZespołu> CzlonkowieZespolu { get; set; }
-    public DbSet<LPA_Pytanie> LPA_Pytania { get; set; }
-    public DbSet<LPA_Wynik> LPA_Wyniki { get; set; }
-    public DbSet<Audyt> LPA_PlanAudytow { get; set; }
+    public DbSet<CzlonkowieZespolu> CzlonkowieZespolu { get; set; }
+    public DbSet<LPA_Pytania> LPA_Pytania { get; set; }
+    public DbSet<LPA_Wyniki> LPA_Wyniki { get; set; }
+    public DbSet<LPA_PlanAudytow> LPA_PlanAudytow { get; set; }
     public DbSet<StanowiskoPracy> StanowiskaPracy { get; set; }
-    public DbSet<PodsumowanieWyniku> LPA_PodsumowanieWynikow { get; set; }
+    public DbSet<LPA_PodsumowanieWynikow> LPA_PodsumowanieWynikow { get; set; }
+    public DbSet<Konta> Konta { get; set; }
 
-public DbSet<BazaAudyt.Models.Konto> Konto { get; set; } = default!;
+   // public DbSet<BazaAudyt.Models.Konto> Konto { get; set; } = default!;
 }

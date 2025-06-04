@@ -63,7 +63,7 @@ namespace BazaAudyt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AudytorId,Towarzyszacy,Data,Stanowisko,DataPlanowana,ObszarAudytu,DataZamkniecia,Pozycja,Lider,Wydzial,Brygada,Audytowany,Komentarz")] Audyt audyt)
+        public async Task<IActionResult> Create([Bind("Id,AudytorId,Towarzyszacy,Data,Stanowisko,DataPlanowana,ObszarAudytu,DataZamkniecia,Pozycja,Lider,Wydzial,Brygada,Audytowany,Komentarz")] LPA_PlanAudytow audyt)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace BazaAudyt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AudytorId,Towarzyszacy,Data,Stanowisko,DataPlanowana,ObszarAudytu,DataZamkniecia,Pozycja,Lider,Wydzial,Brygada,Audytowany,Komentarz")] Audyt audyt)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,AudytorId,Towarzyszacy,Data,Stanowisko,DataPlanowana,ObszarAudytu,DataZamkniecia,Pozycja,Lider,Wydzial,Brygada,Audytowany,Komentarz")] LPA_PlanAudytow audyt)
         {
             if (id != audyt.Id)
             {

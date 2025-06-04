@@ -53,7 +53,7 @@ namespace BazaAudyt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdCzesci,DataWykonania,IdAudytowanego,IdAudytu,Komentarz,Lider,Audytowany,Rozpoczety")] PodsumowanieWyniku podsumowanieWyniku)
+        public async Task<IActionResult> Create([Bind("Id,IdCzesci,DataWykonania,IdAudytowanego,IdAudytu,Komentarz,Lider,Audytowany,Rozpoczety")] LPA_PodsumowanieWynikow podsumowanieWyniku)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace BazaAudyt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdCzesci,DataWykonania,IdAudytowanego,IdAudytu,Komentarz,Lider,Audytowany,Rozpoczety")] PodsumowanieWyniku podsumowanieWyniku)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdCzesci,DataWykonania,IdAudytowanego,IdAudytu,Komentarz,Lider,Audytowany,Rozpoczety")] LPA_PodsumowanieWynikow podsumowanieWyniku)
         {
             if (id != podsumowanieWyniku.Id)
             {

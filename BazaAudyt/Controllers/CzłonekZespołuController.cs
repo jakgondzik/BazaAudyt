@@ -55,7 +55,7 @@ namespace BazaAudyt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Imie,Nazwisko,Inicjaly,Telefon,CzyAdmin,Warstwa,CzyAudytor")] CzłonekZespołu członekZespołu)
+        public async Task<IActionResult> Create([Bind("Id,Imie,Nazwisko,Inicjaly,Telefon,CzyAdmin,Warstwa,CzyAudytor")] CzlonkowieZespolu członekZespołu)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace BazaAudyt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Imie,Nazwisko,Inicjaly,Telefon,CzyAdmin,Warstwa,CzyAudytor")] CzłonekZespołu członekZespołu)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Imie,Nazwisko,Inicjaly,Telefon,CzyAdmin,Warstwa,CzyAudytor")] CzlonkowieZespolu członekZespołu)
         {
             if (id != członekZespołu.Id)
             {

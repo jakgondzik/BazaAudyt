@@ -1,6 +1,6 @@
 ﻿namespace BazaAudyt.Models
 {
-    public class LPA_Wynik
+    public class LPA_Wyniki
     {
         public int Id { get; set; }
         public string? Pytanie { get; set; }

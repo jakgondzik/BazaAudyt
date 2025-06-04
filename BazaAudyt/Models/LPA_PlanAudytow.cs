@@ -1,6 +1,6 @@
 ﻿namespace BazaAudyt.Models
 {
-    public class Audyt
+    public class LPA_PlanAudytow
     {
         public int Id { get; set; }
         public int? AudytorId { get; set; }

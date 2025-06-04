@@ -53,7 +53,7 @@ namespace BazaAudyt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Pytanie,Obszar,Nr,Aktywne,Norma,Waga")] LPA_Pytanie lPA_Pytanie)
+        public async Task<IActionResult> Create([Bind("Id,Pytanie,Obszar,Nr,Aktywne,Norma,Waga")] LPA_Pytania lPA_Pytanie)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace BazaAudyt.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Pytanie,Obszar,Nr,Aktywne,Norma,Waga")] LPA_Pytanie lPA_Pytanie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Pytanie,Obszar,Nr,Aktywne,Norma,Waga")] LPA_Pytania lPA_Pytanie)
         {
             if (id != lPA_Pytanie.Id)
             {

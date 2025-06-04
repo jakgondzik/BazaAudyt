@@ -2,7 +2,7 @@
 
 namespace BazaAudyt.Models
 {
-    public class Konto
+    public class Konta
     {
         public int Id { get; set; }
 

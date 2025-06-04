@@ -2,6 +2,7 @@ using System.Diagnostics;
 using BazaAudyt.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BazaAudyt.Controllers
 {
@@ -40,32 +41,39 @@ namespace BazaAudyt.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Konto(Konto model)
+        public async Task<IActionResult> Konto(Konta model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var User = from m in _context.Konto select m;
-                User = User.Where(s => s.Login.Contains(model.Login));
-                if (User.Count() != 0)
-                {
-                    if (User.First().Password== model.Password)
-                    {
-                        return RedirectToAction("Success");
-                    }
-                }
+                TempData["LoginError"] = "Nieprawid³owe dane wejœciowe.";
+                return RedirectToAction("Fail");
             }
-            return RedirectToAction("Fail");
-        }
 
+            var user = _context.Konta.FirstOrDefault(s => s.Login == model.Login);
+
+            if (user == null)
+            {
+                TempData["LoginError"] = "Nie znaleziono u¿ytkownika.";
+                return RedirectToAction("Fail");
+            }
+
+            if (user.Password.Trim() != model.Password)
+            {
+                TempData["LoginError"] = "B³êdne has³o.";
+                return RedirectToAction("Fail");
+            }
+
+            return RedirectToAction("Success");
+        }
+        
         public IActionResult Success()
         {
-           // return RedirectToAction("~/View/Index","AudytyController");
-            return View();
+            return RedirectToAction("Index", "Audyty");
         }
 
         public IActionResult Fail()
         {
-            return View();
+            return View("Index","Home");
         }
     }
 }
