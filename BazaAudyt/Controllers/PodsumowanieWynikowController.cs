@@ -55,6 +55,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,IdCzesci,DataWykonania,IdAudytowanego,IdAudytu,Komentarz,Lider,Audytowany,Rozpoczety")] LPA_PodsumowanieWynikow podsumowanieWyniku)
         {
+            try
+            {
+                var db = new AppDbContext();
+            
             if (ModelState.IsValid)
             {
                 _context.Add(podsumowanieWyniku);
@@ -63,6 +67,11 @@ namespace BazaAudyt.Controllers
             }
             return View(podsumowanieWyniku);
         }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
+}
 
         // GET: PodsumowanieWynikow/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -96,6 +105,7 @@ namespace BazaAudyt.Controllers
             {
                 try
                 {
+                    var db = new AppDbContext();
                     _context.Update(podsumowanieWyniku);
                     await _context.SaveChangesAsync();
                 }
@@ -110,9 +120,13 @@ namespace BazaAudyt.Controllers
                         throw;
                     }
                 }
+                catch (Exception ex) {
+                    return RedirectToAction("Index");
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(podsumowanieWyniku);
+            
         }
 
         // GET: PodsumowanieWynikow/Delete/5

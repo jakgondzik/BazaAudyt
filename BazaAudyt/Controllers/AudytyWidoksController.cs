@@ -9,24 +9,22 @@ using BazaAudyt.Models;
 
 namespace BazaAudyt.Controllers
 {
-    public class CzłonekZespołuController : Controller
+    public class AudytyWidoksController : Controller
     {
         private readonly AppDbContext _context;
 
-        public CzłonekZespołuController(AppDbContext context)
+        public AudytyWidoksController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: CzłonekZespołu
+        // GET: AudytyWidoks
         public async Task<IActionResult> Index()
         {
-            var czlonkowie = _context.CzlonkowieZespolu.ToList();
-            return View(czlonkowie);
-            //return View(await _context.CzlonkowieZespolu.ToListAsync());
+            return View(await _context.AudytyWidok.ToListAsync());
         }
 
-        // GET: CzłonekZespołu/Details/5
+        // GET: AudytyWidoks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,47 +32,39 @@ namespace BazaAudyt.Controllers
                 return NotFound();
             }
 
-            var członekZespołu = await _context.CzlonkowieZespolu
+            var audytyWidok = await _context.AudytyWidok
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (członekZespołu == null)
+            if (audytyWidok == null)
             {
                 return NotFound();
             }
 
-            return View(członekZespołu);
+            return View(audytyWidok);
         }
 
-        // GET: CzłonekZespołu/Create
+        // GET: AudytyWidoks/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: CzłonekZespołu/Create
+        // POST: AudytyWidoks/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Imie,Nazwisko,Inicjaly,Telefon,CzyAdmin,Warstwa,CzyAudytor")] CzlonkowieZespolu członekZespołu)
+        public async Task<IActionResult> Create([Bind("Id,AudytorId,Towarzyszacy,Data,Stanowisko,DataPlanowana,ObszarAudytu,DataZamkniecia,Pozycja,Lider,Wydzial,Brygada,Audytowany,Komentarz")] AudytyWidok audytyWidok)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var db = new AppDbContext();
-                if (ModelState.IsValid)
-                {
-                    _context.Add(członekZespołu);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                return View(członekZespołu);
+                _context.Add(audytyWidok);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Index");
-            }
+            return View(audytyWidok);
         }
 
-        // GET: CzłonekZespołu/Edit/5
+        // GET: AudytyWidoks/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,24 +72,22 @@ namespace BazaAudyt.Controllers
                 return NotFound();
             }
 
-            var członekZespołu = await _context.CzlonkowieZespolu.FindAsync(id);
-            if (członekZespołu == null)
+            var audytyWidok = await _context.AudytyWidok.FindAsync(id);
+            if (audytyWidok == null)
             {
                 return NotFound();
             }
-            return View(członekZespołu);
+            return View(audytyWidok);
         }
 
-        // POST: CzłonekZespołu/Edit/5
+        // POST: AudytyWidoks/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Imie,Nazwisko,Inicjaly,Telefon,CzyAdmin,Warstwa,CzyAudytor")] CzlonkowieZespolu członekZespołu)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,AudytorId,Towarzyszacy,Data,Stanowisko,DataPlanowana,ObszarAudytu,DataZamkniecia,Pozycja,Lider,Wydzial,Brygada,Audytowany,Komentarz")] AudytyWidok audytyWidok)
         {
-            try
-            {
-                if (id != członekZespołu.Id)
+            if (id != audytyWidok.Id)
             {
                 return NotFound();
             }
@@ -108,12 +96,12 @@ namespace BazaAudyt.Controllers
             {
                 try
                 {
-                    _context.Update(członekZespołu);
+                    _context.Update(audytyWidok);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CzłonekZespołuExists(członekZespołu.Id))
+                    if (!AudytyWidokExists(audytyWidok.Id))
                     {
                         return NotFound();
                     }
@@ -124,15 +112,10 @@ namespace BazaAudyt.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(członekZespołu);
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Index");
-            }
+            return View(audytyWidok);
         }
 
-        // GET: CzłonekZespołu/Delete/5
+        // GET: AudytyWidoks/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -140,34 +123,34 @@ namespace BazaAudyt.Controllers
                 return NotFound();
             }
 
-            var członekZespołu = await _context.CzlonkowieZespolu
+            var audytyWidok = await _context.AudytyWidok
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (członekZespołu == null)
+            if (audytyWidok == null)
             {
                 return NotFound();
             }
 
-            return View(członekZespołu);
+            return View(audytyWidok);
         }
 
-        // POST: CzłonekZespołu/Delete/5
+        // POST: AudytyWidoks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var członekZespołu = await _context.CzlonkowieZespolu.FindAsync(id);
-            if (członekZespołu != null)
+            var audytyWidok = await _context.AudytyWidok.FindAsync(id);
+            if (audytyWidok != null)
             {
-                _context.CzlonkowieZespolu.Remove(członekZespołu);
+                _context.AudytyWidok.Remove(audytyWidok);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CzłonekZespołuExists(int id)
+        private bool AudytyWidokExists(int id)
         {
-            return _context.CzlonkowieZespolu.Any(e => e.Id == id);
+            return _context.AudytyWidok.Any(e => e.Id == id);
         }
     }
 }

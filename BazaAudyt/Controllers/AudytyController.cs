@@ -108,9 +108,7 @@ namespace BazaAudyt.Controllers
         {
             try
             {
-
-            
-                var db = new AppDbContext();
+               var db = new AppDbContext();
             //Do dokończenia
                 if (id != audyt.Id)
                 {
