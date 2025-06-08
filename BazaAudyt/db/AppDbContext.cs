@@ -34,5 +34,6 @@ public class AppDbContext : DbContext
     public DbSet<LPA_PodsumowanieWynikow> LPA_PodsumowanieWynikow { get; set; }
     public DbSet<Konta> Konta { get; set; }
 
-   // public DbSet<BazaAudyt.Models.Konto> Konto { get; set; } = default!;
+    public DbSet<AudytyWidok> AudytyWidok { get; set; }
+    // public DbSet<BazaAudyt.Models.Konto> Konto { get; set; } = default!;
 }

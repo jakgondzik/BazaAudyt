@@ -18,3 +18,5 @@ PO ZMIANIE CONNECTION STRING UPDATE DATABASE
 
 -Czy towarzyszący też po id czy imie i nazwisko
 -Home można zmienić nazwe, zrobiłem, że pełni funkcje logowania
+
+-Chce przejść na widoki z tabel.

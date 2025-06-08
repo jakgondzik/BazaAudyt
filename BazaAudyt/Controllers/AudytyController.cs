@@ -27,6 +27,7 @@ namespace BazaAudyt.Controllers
             using (SqlConnection connection = new SqlConnection(_context.loggedConnectionString))
             {
                 var audyty = _context.LPA_PlanAudytow.ToList();
+                //var audyty = _context.AudytyWidok.ToList();
                 return View(audyty);
             }
 
@@ -105,6 +106,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,AudytorId,Towarzyszacy,Data,Stanowisko,DataPlanowana,ObszarAudytu,DataZamkniecia,Pozycja,Lider,Wydzial,Brygada,Audytowany,Komentarz")] LPA_PlanAudytow audyt)
         {
+            try
+            {
+
+            
                 var db = new AppDbContext();
             //Do dokończenia
                 if (id != audyt.Id)
@@ -116,10 +121,13 @@ namespace BazaAudyt.Controllers
                 {
                     try
                     {
-                        _context.Update(audyt);
-                        await _context.SaveChangesAsync();
-                    }
-                    catch (DbUpdateConcurrencyException)
+                    // _context.Update(audyt);
+                    //await _context.SaveChangesAsync();
+                    db.Update(audyt);
+                    await db.SaveChangesAsync();
+                    db.Dispose();
+                }
+                catch (DbUpdateConcurrencyException)
                     {
                         if (!AudytExists(audyt.Id))
                         {
@@ -133,6 +141,12 @@ namespace BazaAudyt.Controllers
                     return RedirectToAction(nameof(Index));
                 }
                 return View(audyt);
+            }
+            catch(Exception e)
+            {
+                
+                return RedirectToAction("Index");
+            }
             }
 
 
