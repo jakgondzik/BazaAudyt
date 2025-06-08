@@ -62,8 +62,8 @@ namespace BazaAudyt.Controllers
                 var db = new AppDbContext();
                 if (ModelState.IsValid)
                 {
-                    _context.Add(członekZespołu);
-                    await _context.SaveChangesAsync();
+                    db.Add(członekZespołu);
+                    await db.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
                 return View(członekZespołu);
@@ -97,9 +97,8 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Imie,Nazwisko,Inicjaly,Telefon,CzyAdmin,Warstwa,CzyAudytor")] CzlonkowieZespolu członekZespołu)
         {
-            try
-            {
-                if (id != członekZespołu.Id)
+
+            if (id != członekZespołu.Id)
             {
                 return NotFound();
             }
@@ -108,8 +107,9 @@ namespace BazaAudyt.Controllers
             {
                 try
                 {
-                    _context.Update(członekZespołu);
-                    await _context.SaveChangesAsync();
+                    var db = new AppDbContext();
+                    db.Update(członekZespołu);
+                    await db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -122,14 +122,15 @@ namespace BazaAudyt.Controllers
                         throw;
                     }
                 }
+
+                catch (Exception ex)
+                {
+                    return RedirectToAction("Index");
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(członekZespołu);
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Index");
-            }
+
         }
 
         // GET: CzłonekZespołu/Delete/5
@@ -155,14 +156,23 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var członekZespołu = await _context.CzlonkowieZespolu.FindAsync(id);
-            if (członekZespołu != null)
+            try
             {
-                _context.CzlonkowieZespolu.Remove(członekZespołu);
+                var db = new AppDbContext();
+                var członekZespołu = await db.CzlonkowieZespolu.FindAsync(id);
+                if (członekZespołu != null)
+                {
+                    db.CzlonkowieZespolu.Remove(członekZespołu);
+                }
+
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool CzłonekZespołuExists(int id)

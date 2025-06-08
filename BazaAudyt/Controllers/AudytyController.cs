@@ -73,13 +73,21 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,AudytorId,Towarzyszacy,Data,Stanowisko,DataPlanowana,ObszarAudytu,DataZamkniecia,Pozycja,Lider,Wydzial,Brygada,Audytowany,Komentarz")] LPA_PlanAudytow audyt)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(audyt);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var db = new AppDbContext();
+                if (ModelState.IsValid)
+                {
+                    db.Add(audyt);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(audyt);
             }
-            return View(audyt);
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         // GET: Audyty/Edit/5
@@ -171,14 +179,23 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var audyt = await _context.LPA_PlanAudytow.FindAsync(id);
-            if (audyt != null)
+            try
             {
-                _context.LPA_PlanAudytow.Remove(audyt);
+                var db = new AppDbContext();
+                var audyt = await _context.LPA_PlanAudytow.FindAsync(id);
+                if (audyt != null)
+                {
+                    _context.LPA_PlanAudytow.Remove(audyt);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index");
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool AudytExists(int id)

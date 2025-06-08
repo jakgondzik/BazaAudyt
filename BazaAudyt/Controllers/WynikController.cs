@@ -55,13 +55,20 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Pytanie,Wynik,IdAudytu,Komentarz,Wartosc,Uwagi")] LPA_Wyniki lPA_Wynik)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(lPA_Wynik);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(lPA_Wynik);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(lPA_Wynik);
             }
-            return View(lPA_Wynik);
+            catch (Exception ex) {
+                return RedirectToAction("Index");
+            }
+
         }
 
         // GET: Wynik/Edit/5
@@ -96,8 +103,9 @@ namespace BazaAudyt.Controllers
             {
                 try
                 {
-                    _context.Update(lPA_Wynik);
-                    await _context.SaveChangesAsync();
+                    var db = new AppDbContext();
+                    db.Update(lPA_Wynik);
+                    await db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -109,6 +117,9 @@ namespace BazaAudyt.Controllers
                     {
                         throw;
                     }
+                }
+                catch (Exception ex) {
+                    return RedirectToAction("Index");
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -138,14 +149,22 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var lPA_Wynik = await _context.LPA_Wyniki.FindAsync(id);
-            if (lPA_Wynik != null)
+            try
             {
-                _context.LPA_Wyniki.Remove(lPA_Wynik);
+                var db = new AppDbContext();
+                var lPA_Wynik = await db.LPA_Wyniki.FindAsync(id);
+                if (lPA_Wynik != null)
+                {
+                   db.LPA_Wyniki.Remove(lPA_Wynik);
+                }
+
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex) {
+                return RedirectToAction("Index");
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool LPA_WynikExists(int id)

@@ -55,13 +55,21 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Pytanie,Obszar,Nr,Aktywne,Norma,Waga")] LPA_Pytania lPA_Pytanie)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(lPA_Pytanie);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var db = new AppDbContext();
+                if (ModelState.IsValid)
+                {
+                    db.Add(lPA_Pytanie);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(lPA_Pytanie);
             }
-            return View(lPA_Pytanie);
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         // GET: Pytanie/Edit/5
@@ -87,6 +95,7 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Pytanie,Obszar,Nr,Aktywne,Norma,Waga")] LPA_Pytania lPA_Pytanie)
         {
+
             if (id != lPA_Pytanie.Id)
             {
                 return NotFound();
@@ -96,8 +105,9 @@ namespace BazaAudyt.Controllers
             {
                 try
                 {
-                    _context.Update(lPA_Pytanie);
-                    await _context.SaveChangesAsync();
+                    var db = new AppDbContext();
+                    db.Update(lPA_Pytanie);
+                    await db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -109,6 +119,10 @@ namespace BazaAudyt.Controllers
                     {
                         throw;
                     }
+                }
+                catch (Exception ex)
+                {
+                    return RedirectToAction("Index");
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -138,15 +152,24 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var lPA_Pytanie = await _context.LPA_Pytania.FindAsync(id);
-            if (lPA_Pytanie != null)
+            try
             {
-                _context.LPA_Pytania.Remove(lPA_Pytanie);
-            }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+                var db = new AppDbContext();
+                var lPA_Pytanie = await db.LPA_Pytania.FindAsync(id);
+                if (lPA_Pytanie != null)
+                {
+                    db.LPA_Pytania.Remove(lPA_Pytanie);
+                }
+
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
+           }
 
         private bool LPA_PytanieExists(int id)
         {

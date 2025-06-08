@@ -55,13 +55,22 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Wydzial,Proces,Gniazdo,NrGniazda,RodzajStanowiska,IdLidera,Typ,ObszarLPA")] StanowiskoPracy stanowiskoPracy)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(stanowiskoPracy);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var db = new AppDbContext();
+                if (ModelState.IsValid)
+                {
+                    db.Add(stanowiskoPracy);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(stanowiskoPracy);
             }
-            return View(stanowiskoPracy);
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
+
         }
 
         // GET: StanowiskaPracy/Edit/5
@@ -96,8 +105,9 @@ namespace BazaAudyt.Controllers
             {
                 try
                 {
-                    _context.Update(stanowiskoPracy);
-                    await _context.SaveChangesAsync();
+                    var db = new AppDbContext();
+                    db.Update(stanowiskoPracy);
+                    await db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -109,6 +119,9 @@ namespace BazaAudyt.Controllers
                     {
                         throw;
                     }
+                }
+                catch (Exception ex)
+                {
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -138,14 +151,23 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var stanowiskoPracy = await _context.StanowiskaPracy.FindAsync(id);
-            if (stanowiskoPracy != null)
+            try
             {
-                _context.StanowiskaPracy.Remove(stanowiskoPracy);
+                var db = new AppDbContext();
+                var stanowiskoPracy = await db.StanowiskaPracy.FindAsync(id);
+                if (stanowiskoPracy != null)
+                {
+                    db.StanowiskaPracy.Remove(stanowiskoPracy);
+                }
+
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex) {
+                return RedirectToAction("Index");
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
         }
 
         private bool StanowiskoPracyExists(int id)

@@ -61,8 +61,8 @@ namespace BazaAudyt.Controllers
             
             if (ModelState.IsValid)
             {
-                _context.Add(podsumowanieWyniku);
-                await _context.SaveChangesAsync();
+                    db.Add(podsumowanieWyniku);
+                await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(podsumowanieWyniku);
@@ -96,6 +96,7 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,IdCzesci,DataWykonania,IdAudytowanego,IdAudytu,Komentarz,Lider,Audytowany,Rozpoczety")] LPA_PodsumowanieWynikow podsumowanieWyniku)
         {
+
             if (id != podsumowanieWyniku.Id)
             {
                 return NotFound();
@@ -106,8 +107,8 @@ namespace BazaAudyt.Controllers
                 try
                 {
                     var db = new AppDbContext();
-                    _context.Update(podsumowanieWyniku);
-                    await _context.SaveChangesAsync();
+                    db.Update(podsumowanieWyniku);
+                    await db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -132,19 +133,23 @@ namespace BazaAudyt.Controllers
         // GET: PodsumowanieWynikow/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var podsumowanieWyniku = await _context.LPA_PodsumowanieWynikow
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (podsumowanieWyniku == null)
-            {
-                return NotFound();
-            }
 
-            return View(podsumowanieWyniku);
+
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var podsumowanieWyniku = await _context.LPA_PodsumowanieWynikow
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (podsumowanieWyniku == null)
+                {
+                    return NotFound();
+                }
+
+                return View(podsumowanieWyniku);
+
         }
 
         // POST: PodsumowanieWynikow/Delete/5
@@ -152,14 +157,22 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var podsumowanieWyniku = await _context.LPA_PodsumowanieWynikow.FindAsync(id);
+            try
+            {
+                var db = new AppDbContext();
+                var podsumowanieWyniku = await db.LPA_PodsumowanieWynikow.FindAsync(id);
             if (podsumowanieWyniku != null)
             {
-                _context.LPA_PodsumowanieWynikow.Remove(podsumowanieWyniku);
+                    db.LPA_PodsumowanieWynikow.Remove(podsumowanieWyniku);
             }
 
-            await _context.SaveChangesAsync();
+            await db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         private bool PodsumowanieWynikuExists(int id)
