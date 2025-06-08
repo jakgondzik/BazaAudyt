@@ -43,7 +43,7 @@ namespace BazaAudyt.Controllers
         [HttpPost]
         public async Task<IActionResult> Konto(Konta model)
         {
-            String connectionString = $"Data Source=KUBA-KOMPUTER\\\\SQLEXPRESS;Database=Audyty;User Id={model.Login.Trim()};Password={model.Password.Trim()}Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            AppDbContext.newConnectionString = $"Data Source=KUBA-KOMPUTER\\SQLEXPRESS;Database=Audyty;User Id={model.Login.Trim()};Password={model.Password.Trim()};Integrated Security=False;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
             
             
             if (!ModelState.IsValid)
@@ -57,12 +57,6 @@ namespace BazaAudyt.Controllers
             {
                 return RedirectToAction("Fail");
             }
-
-            if (user.Password.Trim() != model.Password)
-            {
-                return RedirectToAction("Fail");
-            }
-
             return RedirectToAction("Success");
         }
         

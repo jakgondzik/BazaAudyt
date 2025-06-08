@@ -6,8 +6,26 @@ using Microsoft.Data.SqlClient;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {
+    }
+    public String loggedConnectionString = "Data Source=KUBA-KOMPUTER\\SQLEXPRESS;Database=Audyty;User Id=audytor;Password=audytor;Integrated Security=False;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+    public static String newConnectionString = "";
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if(newConnectionString!="")
+        {
+            optionsBuilder.UseSqlServer(newConnectionString);
+        }
+        else
+        {
+            optionsBuilder.UseSqlServer(loggedConnectionString);
+        }
+        
+    }
+    public AppDbContext()
+    {
 
+    }
     public DbSet<CzlonkowieZespolu> CzlonkowieZespolu { get; set; }
     public DbSet<LPA_Pytania> LPA_Pytania { get; set; }
     public DbSet<LPA_Wyniki> LPA_Wyniki { get; set; }

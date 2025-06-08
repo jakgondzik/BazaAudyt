@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BazaAudyt.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Options;
 
 namespace BazaAudyt.Controllers
 {
@@ -17,12 +19,17 @@ namespace BazaAudyt.Controllers
         {
             _context = context;
         }
+        
 
         // GET: Audyty
         public async Task<IActionResult> Index()
         {
-            var audyty = _context.LPA_PlanAudytow.ToList();
-            return View(audyty);
+            using (SqlConnection connection = new SqlConnection(_context.loggedConnectionString))
+            {
+                var audyty = _context.LPA_PlanAudytow.ToList();
+                return View(audyty);
+            }
+
         }
 
         // GET: Audyty/Details/5
@@ -77,17 +84,18 @@ namespace BazaAudyt.Controllers
         // GET: Audyty/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+                    if (id == null)
+                    {
+                        return NotFound();
+                    }
 
-            var audyt = await _context.LPA_PlanAudytow.FindAsync(id);
-            if (audyt == null)
-            {
-                return NotFound();
-            }
-            return View(audyt);
+                    var audyt = await _context.LPA_PlanAudytow.FindAsync(id);
+                    if (audyt == null)
+                    {
+                        return NotFound();
+                    }
+                    return View(audyt);
+
         }
 
         // POST: Audyty/Edit/5
@@ -97,33 +105,36 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,AudytorId,Towarzyszacy,Data,Stanowisko,DataPlanowana,ObszarAudytu,DataZamkniecia,Pozycja,Lider,Wydzial,Brygada,Audytowany,Komentarz")] LPA_PlanAudytow audyt)
         {
-            if (id != audyt.Id)
-            {
-                return NotFound();
+                var db = new AppDbContext();
+            //Do dokończenia
+                if (id != audyt.Id)
+                {
+                    return NotFound();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(audyt);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!AudytExists(audyt.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(audyt);
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(audyt);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AudytExists(audyt.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(audyt);
-        }
 
         // GET: Audyty/Delete/5
         public async Task<IActionResult> Delete(int? id)
