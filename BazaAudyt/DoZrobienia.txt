@@ -22,3 +22,8 @@ PO ZMIANIE CONNECTION STRING UPDATE DATABASE
 -Chce przejść na widoki z tabel.
 
 -Trzeba dopisać obsługe logowania do akcji delete edit i create w każdym kontrolerze
+
+
+
+
+-Wydaje mi sie, ze da sie fitltowac widok ustawiając to co chcemy schować na null. tylko wtedy znika sens uzywania nulli
