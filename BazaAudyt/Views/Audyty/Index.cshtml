@@ -68,5 +68,8 @@
             </tr>
         }
     </tbody>
-    <button>Wygeneruj raport</button>
+    @using (Html.BeginForm("GenerujRaport", "Audyty", FormMethod.Post))
+    {
+        <button type="submit">Wygeneruj raport</button>
+    }
 </table>
