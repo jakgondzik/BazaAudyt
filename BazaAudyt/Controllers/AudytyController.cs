@@ -207,18 +207,15 @@ namespace BazaAudyt.Controllers
         [HttpPost]
         public ActionResult GenerujRaport()
         {
-            string pythonExe = "python";
             string projectRoot = AppDomain.CurrentDomain.BaseDirectory;
-            string scriptPath = Path.Combine(projectRoot, "..", "raport.py");
-            scriptPath = Path.GetFullPath(scriptPath);
+            string exePath = Path.Combine(projectRoot, "raport.exe");
 
-            if (!System.IO.File.Exists(scriptPath))
-                return Content("Skrypt nie istnieje: " + scriptPath);
+            if (!System.IO.File.Exists(exePath))
+                return Content("Plik EXE nie istnieje: " + exePath);
 
             var psi = new ProcessStartInfo
             {
-                FileName = pythonExe,
-                Arguments = $"\"{scriptPath}\"",
+                FileName = exePath,
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
