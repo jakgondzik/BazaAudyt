@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using BazaAudyt.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
+using System.Diagnostics;
+using Microsoft.Extensions.Hosting.Internal;
 
 namespace BazaAudyt.Controllers
 {
@@ -201,6 +203,46 @@ namespace BazaAudyt.Controllers
         private bool AudytExists(int id)
         {
             return _context.LPA_PlanAudytow.Any(e => e.Id == id);
+        }
+        [HttpPost]
+        public ActionResult GenerujRaport()
+        {
+            string pythonExe = "python";
+            string projectRoot = AppDomain.CurrentDomain.BaseDirectory;
+            string scriptPath = Path.Combine(projectRoot, "..", "raport.py");
+            scriptPath = Path.GetFullPath(scriptPath);
+
+            if (!System.IO.File.Exists(scriptPath))
+                return Content("Skrypt nie istnieje: " + scriptPath);
+
+            var psi = new ProcessStartInfo
+            {
+                FileName = pythonExe,
+                Arguments = $"\"{scriptPath}\"",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            };
+
+            try
+            {
+                using (var process = Process.Start(psi))
+                {
+                    string output = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
+                    process.WaitForExit();
+
+                    if (!string.IsNullOrWhiteSpace(error))
+                        return RedirectToAction("Index");
+
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
         }
     }
 }
