@@ -44,8 +44,8 @@ namespace BazaAudyt.Controllers
         public async Task<IActionResult> Konto(Konta model)
         {
             AppDbContext.newConnectionString = $"Data Source=KUBA-KOMPUTER\\SQLEXPRESS;Database=Audyty;User Id={model.Login.Trim()};Password={model.Password.Trim()};Integrated Security=False;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
-            
-            
+
+
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Fail");
