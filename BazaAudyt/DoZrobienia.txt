@@ -27,3 +27,5 @@ PO ZMIANIE CONNECTION STRING UPDATE DATABASE
 
 
 -Wydaje mi sie, ze da sie fitltowac widok ustawiając to co chcemy schować na null. tylko wtedy znika sens uzywania nulli
+
+-FILTRUJEMY PYTANIA PO OBSZARZE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Dużo łatwiej
