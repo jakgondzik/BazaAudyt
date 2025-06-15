@@ -9,6 +9,7 @@ using BazaAudyt.Models;
 
 namespace BazaAudyt.Controllers
 {
+
     public class PytanieController : Controller
     {
         private readonly AppDbContext _context;

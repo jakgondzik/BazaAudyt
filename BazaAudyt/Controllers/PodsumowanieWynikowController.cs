@@ -9,6 +9,7 @@ using BazaAudyt.Models;
 
 namespace BazaAudyt.Controllers
 {
+
     public class PodsumowanieWynikowController : Controller
     {
         private readonly AppDbContext _context;

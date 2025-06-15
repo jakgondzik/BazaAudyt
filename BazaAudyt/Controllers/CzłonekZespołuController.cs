@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BazaAudyt.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BazaAudyt.Controllers
 {
+    
     public class CzłonekZespołuController : Controller
     {
         private readonly AppDbContext _context;

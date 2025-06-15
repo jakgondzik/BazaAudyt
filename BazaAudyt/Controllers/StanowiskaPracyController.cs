@@ -9,6 +9,7 @@ using BazaAudyt.Models;
 
 namespace BazaAudyt.Controllers
 {
+
     public class StanowiskaPracyController : Controller
     {
         private readonly AppDbContext _context;

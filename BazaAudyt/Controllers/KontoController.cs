@@ -2,6 +2,7 @@
 
 namespace BazaAudyt.Controllers
 {
+
     public class KontoController : Controller
     {
         public IActionResult Index()

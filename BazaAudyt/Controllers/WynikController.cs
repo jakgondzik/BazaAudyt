@@ -9,6 +9,7 @@ using BazaAudyt.Models;
 
 namespace BazaAudyt.Controllers
 {
+
     public class WynikController : Controller
     {
         private readonly AppDbContext _context;
@@ -171,5 +172,35 @@ namespace BazaAudyt.Controllers
         {
             return _context.LPA_Wyniki.Any(e => e.Id == id);
         }
+
+        public IActionResult WynikiDlaAudytu(int id)
+        {
+            var wyniki = _context.LPA_Wyniki
+                .Where(w => w.IdAudytu == id)
+                .ToList();
+
+            ViewBag.AudytId = id;
+            return View("WynikiDlaAudytu", wyniki);
+        }
+
+        [HttpPost]
+        public IActionResult ZapiszWynikiDlaAudytu(List<LPA_Wyniki> model, int audytId)
+        {
+            foreach (var w in model)
+            {
+                var wynik = _context.LPA_Wyniki.FirstOrDefault(x => x.Id == w.Id);
+                if (wynik != null)
+                {
+                    wynik.Wynik = w.Wynik;
+                    wynik.Komentarz = w.Komentarz;
+                    wynik.Wartosc = w.Wartosc;
+                    wynik.Uwagi = w.Uwagi;
+                }
+            }
+
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Audyty");
+        }
+
     }
 }

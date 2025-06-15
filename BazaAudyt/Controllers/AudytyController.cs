@@ -10,9 +10,11 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
 using Microsoft.Extensions.Hosting.Internal;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BazaAudyt.Controllers
 {
+    
     public class AudytyController : Controller
     {
         private readonly AppDbContext _context;

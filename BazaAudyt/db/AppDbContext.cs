@@ -8,7 +8,7 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {
     }
-    public String loggedConnectionString = "Data Source=KUBA-KOMPUTER\\SQLEXPRESS;Database=Audyty;User Id=audytor;Password=audytor;Integrated Security=False;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+    public String loggedConnectionString = "Data Source=KUBA-KOMPUTER;Database=Audyty;User Id=audytor;Password=audytor;Integrated Security=False;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
     public static String newConnectionString = "";
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
