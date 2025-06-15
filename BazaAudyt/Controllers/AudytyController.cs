@@ -78,9 +78,26 @@ namespace BazaAudyt.Controllers
             try
             {
                 var db = new AppDbContext();
+
+
                 if (ModelState.IsValid)
                 {
                     db.Add(audyt);
+                    var pytania = db.LPA_Pytania
+            .Where(p => p.Obszar == audyt.ObszarAudytu.Trim())
+            .ToList();
+                    foreach (var pytanie in pytania)
+                    {
+                        var wynik = new LPA_Wyniki
+                        {
+                            IdAudytu = audyt.Id,
+                            Pytanie = pytanie.Id
+
+                        };
+
+                        db.LPA_Wyniki.Add(wynik);
+                    }
+
                     await db.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
@@ -88,7 +105,8 @@ namespace BazaAudyt.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Index");
+                //return NotFound();
+               return RedirectToAction("Index");
             }
         }
 
