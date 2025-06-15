@@ -36,15 +36,15 @@
         {
             <tr>
                 <td>
-                    <select name="Audytor">
-                       @* @foreach (var czlonek in Model.CzlonkowieZespolu)
+                    @*<select name="Audytor">
+                        @foreach (var czlonek in Model.CzlonkowieZespolu)
                         {
                             <option value="@czlonek.Id" selected="@(czlonek.Inicjaly == item.Audytor ? "selected" : null)">
                                 @czlonek.Inicjaly
                             </option>
 
-                        }*@
-                    </select>
+                        }
+                    </select>*@
                     @Html.DisplayFor(modelItem => item.AudytorId)
                     @*Wyrzuca indeksy a miało wyrzucać Nazwisko*@
                 </td>
