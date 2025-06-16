@@ -36,4 +36,12 @@ public class AppDbContext : DbContext
 
     public DbSet<AudytyWidok> AudytyWidok { get; set; }
     // public DbSet<BazaAudyt.Models.Konto> Konto { get; set; } = default!;
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<LPA_Wyniki>()
+            .HasOne(w => w.PytanieNavigation)
+            .WithMany()
+            .HasForeignKey(w => w.Pytanie);
+    }
 }

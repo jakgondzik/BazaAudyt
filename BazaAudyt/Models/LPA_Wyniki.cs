@@ -9,5 +9,7 @@
         public string? Komentarz { get; set; }
         public int? Wartosc { get; set; }
         public string? Uwagi { get; set; }
+
+        public LPA_Pytania? PytanieNavigation { get; set; }
     }
 }

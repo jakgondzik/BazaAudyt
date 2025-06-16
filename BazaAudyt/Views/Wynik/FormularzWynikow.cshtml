@@ -1,0 +1,35 @@
+﻿@model List<BazaAudyt.Models.ViewModels.PytanieZwynikiemViewModel>
+
+<h2>Formularz wyników audytu</h2>
+
+<form asp-action="FormularzWynikow" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Pytanie</th>
+                <th>Wynik</th>
+                <th>Komentarz</th>
+                <th>Wartość</th>
+                <th>Uwagi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                    <tr>
+                        <td>
+                        @Model[i].PytanieTresc
+                            <input type="hidden" name="model[@i].PytanieId" value="@Model[i].PytanieId" />
+                            <input type="hidden" name="model[@i].WynikId" value="@Model[i].WynikId" />
+                            <input type="hidden" name="model[@i].AudytId" value="@Model[i].AudytId" />
+                        </td>
+                        <td><input class="form-control" name="model[@i].Wynik" value="@Model[i].Wynik" /></td>
+                        <td><input class="form-control" name="model[@i].Komentarz" value="@Model[i].Komentarz" /></td>
+                        <td><input class="form-control" type="number" name="model[@i].Wartosc" value="@Model[i].Wartosc" /></td>
+                        <td><input class="form-control" name="model[@i].Uwagi" value="@Model[i].Uwagi" /></td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-success">Zapisz</button>
+</form>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BazaAudyt.Models;
+using BazaAudyt.Models.ViewModels;
 
 namespace BazaAudyt.Controllers
 {
@@ -173,29 +174,73 @@ namespace BazaAudyt.Controllers
             return _context.LPA_Wyniki.Any(e => e.Id == id);
         }
 
-        public IActionResult WynikiDlaAudytu(int id)
+
+
+        public IActionResult FormularzWynikow(int audytId)
         {
+            var audyt = _context.LPA_PlanAudytow.FirstOrDefault(a => a.Id == audytId);
+            if (audyt == null)
+                return NotFound();
+            Console.WriteLine("audyt.ObszarAudytu = " + audyt.ObszarAudytu);
+
+
+            var pytania = _context.LPA_Pytania
+    .Where(p => p.Obszar.Trim().ToLower() == audyt.ObszarAudytu.Trim().ToLower())
+    .ToList();
+            var wszystkieObszary = _context.LPA_Pytania.Select(p => p.Obszar).Distinct().ToList();
+            foreach (var o in wszystkieObszary)
+            {
+                Console.WriteLine("Obszar w pytaniu: '" + o + "'");
+            }
+
+
             var wyniki = _context.LPA_Wyniki
-                .Where(w => w.IdAudytu == id)
+                .Where(w => w.IdAudytu == audytId)
                 .ToList();
 
-            ViewBag.AudytId = id;
-            return View("WynikiDlaAudytu", wyniki);
+            var model = pytania
+                .GroupJoin(wyniki, p => p.Id, w => w.Pytanie, (p, wynikiGroup) => new { p, wynik = wynikiGroup.FirstOrDefault() })
+                .Select(x => new PytanieZwynikiemViewModel
+                {
+                    PytanieId = x.p.Id,
+                    PytanieTresc = x.p.Pytanie,
+                    WynikId = x.wynik?.Id,
+                    Wynik = x.wynik?.Wynik,
+                    Komentarz = x.wynik?.Komentarz,
+                    Wartosc = x.wynik?.Wartosc,
+                    Uwagi = x.wynik?.Uwagi,
+                    AudytId = audytId
+                }).ToList();
+
+            return View(model);
         }
 
+
         [HttpPost]
-        public IActionResult ZapiszWynikiDlaAudytu(List<LPA_Wyniki> model, int audytId)
+        public IActionResult FormularzWynikow(List<PytanieZwynikiemViewModel> model)
         {
-            foreach (var w in model)
+            foreach (var x in model)
             {
-                var wynik = _context.LPA_Wyniki.FirstOrDefault(x => x.Id == w.Id);
-                if (wynik != null)
+                LPA_Wyniki wynik;
+
+                if (x.WynikId.HasValue)
                 {
-                    wynik.Wynik = w.Wynik;
-                    wynik.Komentarz = w.Komentarz;
-                    wynik.Wartosc = w.Wartosc;
-                    wynik.Uwagi = w.Uwagi;
+                    wynik = _context.LPA_Wyniki.First(w => w.Id == x.WynikId);
                 }
+                else
+                {
+                    wynik = new LPA_Wyniki
+                    {
+                        IdAudytu = x.AudytId,
+                        Pytanie = x.PytanieId
+                    };
+                    _context.LPA_Wyniki.Add(wynik);
+                }
+
+                wynik.Wynik = x.Wynik;
+                wynik.Komentarz = x.Komentarz;
+                wynik.Wartosc = x.Wartosc;
+                wynik.Uwagi = x.Uwagi;
             }
 
             _context.SaveChanges();

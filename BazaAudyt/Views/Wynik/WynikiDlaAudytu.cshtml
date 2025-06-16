@@ -11,7 +11,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Pytanie (Id)</th>
+                <th>Pytanie</th>
                 <th>Wynik</th>
                 <th>Komentarz</th>
                 <th>Wartość</th>
@@ -23,13 +23,13 @@
             {
                     <tr>
                         <td>
-                        @Model[i].Pytanie
+                        @Model[i].PytanieNavigation?.Pytanie
                             <input type="hidden" name="model[@i].Id" value="@Model[i].Id" />
                         </td>
-                        <td><input name="model[@i].Wynik" value="@Model[i].Wynik" class="form-control" /></td>
-                        <td><input name="model[@i].Komentarz" value="@Model[i].Komentarz" class="form-control" /></td>
+                        <td><input type="text" name="model[@i].Wynik" value="@Model[i].Wynik" class="form-control" /></td>
+                        <td><input type="text" name="model[@i].Komentarz" value="@Model[i].Komentarz" class="form-control" /></td>
                         <td><input type="number" name="model[@i].Wartosc" value="@Model[i].Wartosc" class="form-control" /></td>
-                        <td><input name="model[@i].Uwagi" value="@Model[i].Uwagi" class="form-control" /></td>
+                        <td><input type="text" name="model[@i].Uwagi" value="@Model[i].Uwagi" class="form-control" /></td>
                     </tr>
             }
         </tbody>
