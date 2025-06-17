@@ -81,20 +81,21 @@ namespace BazaAudyt.Controllers
             {
                 var db = new AppDbContext();
 
-
                 if (ModelState.IsValid)
                 {
                     db.Add(audyt);
+                    await db.SaveChangesAsync();
+
                     var pytania = db.LPA_Pytania
-            .Where(p => p.Obszar == audyt.ObszarAudytu.Trim())
-            .ToList();
+                        .Where(p => p.Obszar == audyt.ObszarAudytu.Trim())
+                        .ToList();
+
                     foreach (var pytanie in pytania)
                     {
                         var wynik = new LPA_Wyniki
                         {
                             IdAudytu = audyt.Id,
                             Pytanie = pytanie.Id
-
                         };
 
                         db.LPA_Wyniki.Add(wynik);
