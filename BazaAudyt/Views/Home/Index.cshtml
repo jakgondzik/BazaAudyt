@@ -1,6 +1,6 @@
 ﻿@model BazaAudyt.Models.Konta
 
-<h1>Login</h1>
+<h1>Zaloguj się do bazy danych</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -9,13 +9,13 @@
 
             <div class="form-group">
                 <label asp-for="Login" class="control-label"></label>
-                <input asp-for="Login" class="form-control" placeholder="Name" />
+                <input asp-for="Login" class="form-control" placeholder="Nazwa użytkownika" />
                 <span asp-validation-for="Login" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" placeholder="Password" />
+                <input asp-for="Password" class="form-control" placeholder="Hasło" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
