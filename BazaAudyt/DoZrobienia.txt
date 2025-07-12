@@ -6,7 +6,9 @@ Password: audytor
 Administrator:
 Login: root
 password: root
-PO ZMIANIE CONNECTION STRING UPDATE DATABASE
+PO ZMIANIE CONNECTION STRING UPDATE
+NA INNYM URZĄDZENIU NIE DZIALA SKRYPT,, TRZEBA DAĆ CONNECTION STRING Z NAZWĄ I HASLEM
+DATABASE
 #Do zrobienia
 -Wyświetlanie listy kombinacji imie + nazwisko w modelu Audyty
 -Sprawdzić typy danych, znalazłem relacje int->varchar
