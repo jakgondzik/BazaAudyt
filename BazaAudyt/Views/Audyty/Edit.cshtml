@@ -42,11 +42,23 @@
                 <input asp-for="DataPlanowana" class="form-control" />
                 <span asp-validation-for="DataPlanowana" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ObszarAudytu" class="control-label"></label>
-                <input asp-for="ObszarAudytu" class="form-control" />
-                <span asp-validation-for="ObszarAudytu" class="text-danger"></span>
+            <div>
+                <select asp-for="ObszarAudytu" class="form-control">
+                @{
+                    var wartosc = Model.ObszarAudytu;
+                }
+                    <option value="Środki produkcji" selected="@(wartosc == "Środki produkcji" ? "selected" : null)">Środki produkcji</option>
+                    <option value="Produkt" selected="@(wartosc == "Produkt" ? "selected" : null)">Produkt</option>
+                    <option value="Proces" selected="@(wartosc == "Proces" ? "selected" : null)">Proces</option>
+                    <option value="Środowisko pracy" selected="@(wartosc == "Środowisko pracy" ? "selected" : null)">Środowisko pracy</option>
+                    <option value="Głos klienta" selected="@(wartosc == "Głos klienta" ? "selected" : null)">Głos klienta</option>
+                    <option value="LPA" selected="@(wartosc == "LPA" ? "selected" : null)">LPA</option>
+                    <option value="Zastosowane Środki" selected="@(wartosc == "Zastosowane Środki" ? "selected" : null)">Zastosowane Środki</option>
+                    <option value="Części zamienne" selected="@(wartosc == "Części zamienne" ? "selected" : null)">Części zamienne</option>
+                    <option value="Środki Konserwacji" selected="@(wartosc == "Środki Konserwacji" ? "selected" : null)">Środki Konserwacji</option>
+                    </select>
             </div>
+
             <div class="form-group">
                 <label asp-for="DataZamkniecia" class="control-label"></label>
                 <input asp-for="DataZamkniecia" class="form-control" />
