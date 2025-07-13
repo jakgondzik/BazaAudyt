@@ -43,6 +43,7 @@
                 <span asp-validation-for="DataPlanowana" class="text-danger"></span>
             </div>
             <div>
+                <label asp-for="ObszarAudytu" class="control-label"></label>
                 <select asp-for="ObszarAudytu" class="form-control">
                 @{
                     var wartosc = Model.ObszarAudytu;
