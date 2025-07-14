@@ -45,22 +45,29 @@ namespace BazaAudyt.Controllers
         [HttpPost]
         public async Task<IActionResult> Konto(Konta model)
         {
-
-            AppDbContext.newConnectionString = $"Data Source=KUBA-KOMPUTER;Database=Audyty;User Id={model.Login.Trim()};Password={model.Password.Trim()};Integrated Security=False;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
-
-
-            if (!ModelState.IsValid)
+            try
             {
-                return RedirectToAction("Fail");
+                AppDbContext.newConnectionString = $"Data Source=KUBA-KOMPUTER;Database=Audyty;User Id={model.Login.Trim()};Password={model.Password.Trim()};Integrated Security=False;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+
+
+                if (!ModelState.IsValid)
+                {
+                    return RedirectToAction("Fail");
+                }
+
+                var user = _context.Konta.FirstOrDefault(s => s.Login == model.Login);
+
+                if (user == null)
+                {
+                    return RedirectToAction("Fail");
+                }
+                return RedirectToAction("Success");
             }
-
-            var user = _context.Konta.FirstOrDefault(s => s.Login == model.Login);
-
-            if (user == null)
+            catch (Exception ex)
             {
-                return RedirectToAction("Fail");
+                //return NotFound();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Success");
         }
         
         public IActionResult Success()
