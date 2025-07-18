@@ -22,12 +22,20 @@ namespace BazaAudyt.Controllers
         // GET: Pytanie
         public async Task<IActionResult> Index()
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View(await _context.LPA_Pytania.ToListAsync());
         }
 
         // GET: Pytanie/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -46,6 +54,10 @@ namespace BazaAudyt.Controllers
         // GET: Pytanie/Create
         public IActionResult Create()
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -56,6 +68,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Pytanie,Obszar,Nr,Aktywne,Norma,Waga")] LPA_Pytania lPA_Pytanie)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 var db = new AppDbContext();
@@ -76,6 +92,10 @@ namespace BazaAudyt.Controllers
         // GET: Pytanie/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -96,7 +116,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Pytanie,Obszar,Nr,Aktywne,Norma,Waga")] LPA_Pytania lPA_Pytanie)
         {
-
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id != lPA_Pytanie.Id)
             {
                 return NotFound();
@@ -133,6 +156,10 @@ namespace BazaAudyt.Controllers
         // GET: Pytanie/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -153,6 +180,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
 

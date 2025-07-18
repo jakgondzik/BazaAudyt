@@ -28,6 +28,10 @@ namespace BazaAudyt.Controllers
         // GET: StanowiskaPracy/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -46,6 +50,10 @@ namespace BazaAudyt.Controllers
         // GET: StanowiskaPracy/Create
         public IActionResult Create()
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -56,6 +64,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Wydzial,Proces,Gniazdo,NrGniazda,RodzajStanowiska,IdLidera,Typ,ObszarLPA")] StanowiskoPracy stanowiskoPracy)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 var db = new AppDbContext();
@@ -77,6 +89,10 @@ namespace BazaAudyt.Controllers
         // GET: StanowiskaPracy/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -97,6 +113,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Wydzial,Proces,Gniazdo,NrGniazda,RodzajStanowiska,IdLidera,Typ,ObszarLPA")] StanowiskoPracy stanowiskoPracy)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id != stanowiskoPracy.Id)
             {
                 return NotFound();
@@ -132,6 +152,10 @@ namespace BazaAudyt.Controllers
         // GET: StanowiskaPracy/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -152,6 +176,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 var db = new AppDbContext();

@@ -23,11 +23,16 @@ namespace BazaAudyt.Controllers
         {
             _context = context;
         }
-        
+
+
 
         // GET: Audyty
         public async Task<IActionResult> Index()
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             using (SqlConnection connection = new SqlConnection(_context.loggedConnectionString))
             {
                 var audyty = _context.LPA_PlanAudytow.ToList();
@@ -40,6 +45,10 @@ namespace BazaAudyt.Controllers
         // GET: Audyty/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -58,10 +67,14 @@ namespace BazaAudyt.Controllers
         // GET: Audyty/Create
         public IActionResult Create()
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var czlonkowie = _context.CzlonkowieZespolu
                 .Select(c => new SelectListItem
                 {
-                    Text = c.Inicjaly,           
+                    Text = c.Imie + " " + c.Nazwisko,           
                     Value = c.Id.ToString()      
                 }).ToList();
 
@@ -77,6 +90,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,AudytorId,Towarzyszacy,Data,Stanowisko,DataPlanowana,ObszarAudytu,DataZamkniecia,Pozycja,Lider,Wydzial,Brygada,Audytowany,Komentarz")] LPA_PlanAudytow audyt)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 var db = new AppDbContext();
@@ -86,7 +103,7 @@ namespace BazaAudyt.Controllers
                     db.Add(audyt);
                     await db.SaveChangesAsync();
 
-                    var pytania = db.LPA_Pytania
+               /*     var pytania = db.LPA_Pytania
                         .Where(p => p.Obszar == audyt.ObszarAudytu.Trim())
                         .ToList();
 
@@ -100,7 +117,7 @@ namespace BazaAudyt.Controllers
 
                         db.LPA_Wyniki.Add(wynik);
                     }
-
+               */
                     await db.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
@@ -116,7 +133,11 @@ namespace BazaAudyt.Controllers
         // GET: Audyty/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-                    if (id == null)
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (id == null)
                     {
                         return NotFound();
                     }
@@ -137,6 +158,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,AudytorId,Towarzyszacy,Data,Stanowisko,DataPlanowana,ObszarAudytu,DataZamkniecia,Pozycja,Lider,Wydzial,Brygada,Audytowany,Komentarz")] LPA_PlanAudytow audyt)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                var db = new AppDbContext();
@@ -182,6 +207,10 @@ namespace BazaAudyt.Controllers
         // GET: Audyty/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -202,6 +231,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 var db = new AppDbContext();
@@ -228,6 +261,10 @@ namespace BazaAudyt.Controllers
         [HttpPost]
         public ActionResult GenerujRaport()
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             string projectRoot = AppDomain.CurrentDomain.BaseDirectory;
             string exePath = Path.Combine(projectRoot, "raport.exe");
 

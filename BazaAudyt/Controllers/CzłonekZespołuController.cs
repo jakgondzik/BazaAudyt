@@ -23,6 +23,10 @@ namespace BazaAudyt.Controllers
         // GET: CzłonekZespołu
         public async Task<IActionResult> Index()
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var czlonkowie = _context.CzlonkowieZespolu.ToList();
             return View(czlonkowie);
             //return View(await _context.CzlonkowieZespolu.ToListAsync());
@@ -31,6 +35,10 @@ namespace BazaAudyt.Controllers
         // GET: CzłonekZespołu/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -49,6 +57,10 @@ namespace BazaAudyt.Controllers
         // GET: CzłonekZespołu/Create
         public IActionResult Create()
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -59,6 +71,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Imie,Nazwisko,Inicjaly,Telefon,CzyAdmin,Warstwa,CzyAudytor")] CzlonkowieZespolu członekZespołu)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 var db = new AppDbContext();
@@ -79,6 +95,10 @@ namespace BazaAudyt.Controllers
         // GET: CzłonekZespołu/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -99,7 +119,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Imie,Nazwisko,Inicjaly,Telefon,CzyAdmin,Warstwa,CzyAudytor")] CzlonkowieZespolu członekZespołu)
         {
-
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id != członekZespołu.Id)
             {
                 return NotFound();
@@ -138,6 +161,10 @@ namespace BazaAudyt.Controllers
         // GET: CzłonekZespołu/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -158,6 +185,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 var db = new AppDbContext();

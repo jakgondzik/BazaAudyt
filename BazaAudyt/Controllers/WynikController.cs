@@ -23,12 +23,20 @@ namespace BazaAudyt.Controllers
         // GET: Wynik
         public async Task<IActionResult> Index()
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View(await _context.LPA_Wyniki.ToListAsync());
         }
 
         // GET: Wynik/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -47,6 +55,10 @@ namespace BazaAudyt.Controllers
         // GET: Wynik/Create
         public IActionResult Create()
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -57,6 +69,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Pytanie,Wynik,IdAudytu,Komentarz,Wartosc,Uwagi")] LPA_Wyniki lPA_Wynik)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 if (ModelState.IsValid)
@@ -76,6 +92,10 @@ namespace BazaAudyt.Controllers
         // GET: Wynik/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -96,6 +116,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Pytanie,Wynik,IdAudytu,Komentarz,Wartosc,Uwagi")] LPA_Wyniki lPA_Wynik)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id != lPA_Wynik.Id)
             {
                 return NotFound();
@@ -131,6 +155,10 @@ namespace BazaAudyt.Controllers
         // GET: Wynik/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -151,6 +179,10 @@ namespace BazaAudyt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             try
             {
                 var db = new AppDbContext();
@@ -178,6 +210,10 @@ namespace BazaAudyt.Controllers
 
         public IActionResult FormularzWynikow(int audytId)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var audyt = _context.LPA_PlanAudytow.FirstOrDefault(a => a.Id == audytId);
             if (audyt == null)
                 return NotFound();
@@ -219,6 +255,10 @@ namespace BazaAudyt.Controllers
         [HttpPost]
         public IActionResult FormularzWynikow(List<PytanieZwynikiemViewModel> model)
         {
+            if (AppDbContext.newConnectionString == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             foreach (var x in model)
             {
                 LPA_Wyniki wynik;

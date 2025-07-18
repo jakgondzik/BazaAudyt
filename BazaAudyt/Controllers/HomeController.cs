@@ -77,6 +77,7 @@ namespace BazaAudyt.Controllers
 
         public IActionResult Fail()
         {
+            AppDbContext.newConnectionString = "";
             return RedirectToAction("Index");
         }
     }
